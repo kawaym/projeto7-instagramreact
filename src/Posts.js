@@ -1,3 +1,4 @@
+import React from "react";
 const posts = [
   {
     nome: "meowed",
@@ -5,6 +6,7 @@ const posts = [
     post: "assets/img/gato-telefone.svg",
     curtidaUser: "assets/img/respondeai.svg",
     user: "respondeai",
+    numeroCurtidas: 101523,
   },
   {
     nome: "barked",
@@ -12,10 +14,20 @@ const posts = [
     post: "assets/img/dog.svg",
     curtidaUser: "assets/img/adorable_animals.svg",
     user: "adorable_animals",
+    numeroCurtidas: 200541,
   },
 ];
 
 export default function Posts() {
+  const [curtido, setCurtido] = React.useState(false);
+  const [salvo, setSalvo] = React.useState(false);
+
+  function curtir() {
+    setCurtido(!curtido);
+    if (!curtido) {
+    }
+  }
+
   return (
     <div class="posts">
       {posts.map((e) => (
@@ -23,7 +35,7 @@ export default function Posts() {
           <div class="topo">
             <div class="usuario">
               <img src={e.img} />
-              {e.nome}
+              <p>{e.nome}</p>
             </div>
             <div class="acoes">
               <ion-icon name="ellipsis-horizontal"></ion-icon>
@@ -37,20 +49,41 @@ export default function Posts() {
           <div class="fundo">
             <div class="acoes">
               <div>
-                <ion-icon name="heart-outline"></ion-icon>
+                {curtido ? (
+                  <ion-icon
+                    onClick={curtir}
+                    name="heart"
+                    style={{ color: "red" }}
+                  ></ion-icon>
+                ) : (
+                  <ion-icon onClick={curtir} name="heart-outline"></ion-icon>
+                )}
                 <ion-icon name="chatbubble-outline"></ion-icon>
                 <ion-icon name="paper-plane-outline"></ion-icon>
               </div>
               <div>
-                <ion-icon name="bookmark-outline"></ion-icon>
+                {salvo ? (
+                  <ion-icon
+                    onClick={() => setSalvo(!salvo)}
+                    name="bookmark"
+                  ></ion-icon>
+                ) : (
+                  <ion-icon
+                    onClick={() => setSalvo(!salvo)}
+                    name="bookmark-outline"
+                  ></ion-icon>
+                )}
               </div>
             </div>
 
             <div class="curtidas">
               <img src={e.curtidaUser} />
               <div class="texto">
-                Curtido por <strong>{e.user}</strong> e{" "}
-                <strong>outras 101.523 pessoas</strong>
+                Curtido por <strong class="strong">{e.user}</strong> e outras
+                <strong class="strong">
+                  {" "}
+                  {curtido ? e.numeroCurtidas + 1 : e.numeroCurtidas} pessoas
+                </strong>
               </div>
             </div>
           </div>
