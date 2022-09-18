@@ -1,17 +1,34 @@
-import React from 'react';
-export default function Usuario(props) {
+import React from "react";
 
+export default function Usuario() {
+  const fotoPadrao = "assets/img/catanacomics.svg";
+  const [nome, setNome] = React.useState("catanacomics");
+  const [foto, setFoto] = React.useState(fotoPadrao);
+  const [usuario, setUsuario] = React.useState("Catana");
 
-    return (
-        <div class="usuario">
-            <img src={props.imagemUsuario} />
-            <div class="texto">
-              <strong>{props.nomeUsuario}</strong>
-              <span>
-                {props.Usuario}
-                <ion-icon name="pencil"></ion-icon>
-              </span>
-            </div>
-          </div>
-    )
+  function InserirNome() {
+    const nomePrompt = prompt("Qual seu nome?");
+    const usuarioPrompt = prompt("Qual seu usuario?");
+    setNome(nomePrompt);
+    setUsuario(usuarioPrompt);
+  }
+
+  function InserirFoto() {
+    const fotoPrompt = prompt("Insira o link da sua foto!");
+    setFoto(fotoPrompt);
+  }
+
+  return (
+    <div class="usuario">
+      <img src={foto} onClick={InserirFoto} />
+      <div class="texto">
+        <strong>{nome}</strong>
+        <span>
+          {usuario}
+
+          <ion-icon name="pencil" onClick={InserirNome}></ion-icon>
+        </span>
+      </div>
+    </div>
+  );
 }
