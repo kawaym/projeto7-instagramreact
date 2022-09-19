@@ -57,9 +57,9 @@ function Pesquisa() {
 function Icones() {
   return (
     <div class="icones">
-      {icones.map((e) => {
-        <ion-icon name={e}></ion-icon>;
-      })}
+      {icones.map((e) => 
+        <ion-icon name={e}></ion-icon>
+      )}
     </div>
   );
 }
